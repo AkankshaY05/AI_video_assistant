@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.pyc
+
+downloads/
+downloades/
+
+.env
+
+*.wav
+*.mp3
+*.mp4
+
+.streamlit/
+
+chroma/
+.chromadb/
