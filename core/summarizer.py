@@ -1,6 +1,6 @@
 from langchain_mistralai import ChatMistralAI
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutParser
+from langchain_core.output_parsers import StrOutputParser
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.runnables import RunnablePassthrough, RunnableLambda
 
@@ -31,7 +31,7 @@ def summarize(transcript : str) -> str:
           ]
      )
 
-     map_chain = map_prompt | llm | StrOutParser()
+     map_chain = map_prompt | llm | StrOutputParser()
 
      chunks = split_transcript(transcript)
      chunk_summaries = [map_chain.invoke({"text": chunk}) for chunk in chunks]
@@ -48,7 +48,7 @@ def summarize(transcript : str) -> str:
      )
 
      combined_chain = (
-          RunnablePassthrough() | RunnableLambda(lambda x:{"text": x}) | combined_prompt | llm | StrOutParser()
+          RunnablePassthrough() | RunnableLambda(lambda x:{"text": x}) | combined_prompt | llm | StrOutputParser()
      )
 
      return combined_chain.invoke(combined)
@@ -67,7 +67,7 @@ def generate_title(transcript: str) -> str:
           ]
      )
     |llm
-    | StrOutParser()
+    | StrOutputParser()
     )
 
 
